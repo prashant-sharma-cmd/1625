@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heartfelt Message</title>
+    <style>
+      @font-face {
+        font-family: "Super Sunday";
+        src: url("./images/SuperSunday-vn3MA.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: "Super Sunday", sans-serif;
+        text-align: center;
+        text-align: center;
+        background: url("./images/bg1.jpg") no-repeat center center/cover;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Modal styling */
+      #musicModal {
+        display: flex;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      #musicModalContent {
+        background-color: #ffc0cb; /* Light pink background */
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 90%;
+        width: 400px;
+      }
+
+      #musicModalContent p {
+        color: #ffffff; /* White text color */
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+
+      #musicModalContent button {
+        background-color: #ff69b4; /* Hot pink button background */
+        color: #ffffff; /* White text color */
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
+        transition: background-color 0.3s;
+      }
+
+      #musicModalContent button:hover {
+        background-color: #ff1493; /* Deep pink on hover */
+      }
+      .content {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 80%;
+        margin: 20px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .gallery img {
+        flex: 1 1 calc(33.333% - 20px);
+        max-width: calc(33.333% - 20px);
+        height: auto;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 800px) {
+        .gallery img {
+          flex: 1 1 calc(50% - 20px);
+          max-width: calc(50% - 20px);
+        }
+      }
+
+      @media (max-width: 500px) {
+        .gallery img {
+          flex: 1 1 calc(100% - 20px);
+          max-width: calc(100% - 20px);
+        }
+      }
+
+      p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+      }
+      button {
+        background-color: #ff4d6d;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #ff1a3d;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+      .modal-content {
+        position: relative;
+        margin: 5% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 700px;
+        background-color: #fff;
+        border-radius: 10px;
+      }
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .gallery img {
+        margin: 5px;
+        width: 30%;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s;
+      }
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: #fff;
+        font-size: 35px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .close:hover,
+      .close:focus {
+        color: #ff4d6d;
+      }
+      @media only screen and (max-width: 480px) {
+        h1 {
+          font-size: 1.2em;
+        }
+
+        .btn {
+          padding: 12px;
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="backgroundMusic" src="./images/song.mp3" preload="auto"></audio>
+
+    <!-- Modal for music consent -->
+    <div id="musicModal">
+      <div id="musicModalContent">
+        <p>Would you like to play background music?</p>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </div>
+    </div>
+    <div class="content">
+      <h1>OMG I LOVE YOU TOO <3 😍😍</h1>
+      <p>
+        Thanks alot for making me part of your life. If you hadn't take up the
+        step I still would be a single goje. At least now I am a goje with most
+        amazing girlfriend anyone could ever get. I am really lucky to even have
+        conversations daily with you, taking any randoms things and make it
+        interesting. I really enjoy tiny bit of moments with you whether it be
+        from you asking for help or sharing our health issues, everything is
+        enjoyable as long as its with you. Sorry for the times I become annoying
+        or sluggy for no reason. And thanks alot for always approaching me even
+        when I act so rude. You are truly great, you are the only one with whom
+        I would love to spend the rest of my life. I wish if I could just time
+        travel and get to the point where we would be living together happily in
+        our cozy apartment with pets, enjoying late movie nights with spicy
+        ramen, watching ghost movies together and both of us getting scared and
+        struggling to even sleep and staying up all night. But then the journey
+        to reaching that point of life is also equally valuable. Some days might
+        be brighter or some might be darker but we will make it to the end no
+        matter what, you are really the love of my life and I don't ever want to
+        loose you. I don't care of anyone else but you. I love you more than I
+        could ever love anyone and more than anyone could ever love you. You are
+        really like a dream come true for me. From the times at school to just
+        silently watching you to now getting to asking you to be my valentine, I
+        still feel sometimes as if I am dreaming but even if it might be a dream
+        I want it to last forever.
+      </p>
+      <button id="openGalleryBtn">Click to see something beautiful</button>
+    </div>
+
+    <!-- The Modal -->
+    <div id="imageModal" class="modal">
+      <span class="close">&times;</span>
+      <div class="modal-content" style="background: transparent">
+        <h1>Obviously you are the most beautiful thing in existence</h1>
+        <div class="gallery">
+          <img src="./images/1.jpg" alt="Memory 1" />
+          <img src="./images/2.jpg" alt="Memory 2" />
+          <img src="./images/3.jpg" alt="Memory 3" />
+          <img src="./images/4.jpg" alt="Memory 4" />
+          <img src="./images/5.jpg" alt="Memory 5" />
+          <img src="./images/6.jpg" alt="Memory 6" />
+          <img src="./images/7.jpg" alt="Memory 7" />
+          <img src="./images/8.jpg" alt="Memory 8" />
+          <img src="./images/9.png" alt="Memory 9" />
+        </div>
+        <button onclick="redirectbutton()">
+          Ahem I have a question to ask, Click here!
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function showMusicModal() {
+        var modal = document.getElementById("musicModal");
+        modal.style.display = "flex";
+
+        var yesBtn = document.getElementById("yesBtn");
+        var noBtn = document.getElementById("noBtn");
+
+        yesBtn.onclick = function () {
+          var audio = document.getElementById("backgroundMusic");
+          audio.play().catch(function (error) {
+            console.error("Error playing audio:", error);
+          });
+          modal.style.display = "none";
+        };
+
+        noBtn.onclick = function () {
+          modal.style.display = "none";
+        };
+      }
+
+      window.onload = showMusicModal;
+
+      var modal = document.getElementById("imageModal");
+
+      var btn = document.getElementById("openGalleryBtn");
+
+      var span = document.getElementsByClassName("close")[0];
+
+      btn.onclick = function () {
+        modal.style.display = "block";
+      };
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      function redirectbutton() {
+        window.location.replace("./proposal.html");
+      }
+    </script>
+  </body>
+</html>

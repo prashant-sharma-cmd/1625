@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine's Word Scramble Game</title>
+
+    <style>
+      @font-face {
+        font-family: "Super Sunday";
+        src: url("./images/SuperSunday-vn3MA.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: "Super Sunday", sans-serif;
+        text-align: center;
+        background: url("https://www.publicdomainpictures.net/pictures/240000/velka/valentines-day-background.jpg")
+          no-repeat center center/cover;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .game-container {
+        background: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+      h1 {
+        color: #e60073;
+      }
+      .letter {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 15px;
+        font-size: 2rem;
+        background-color: #ffb3d9;
+        border-radius: 5px;
+        cursor: move;
+        user-select: none;
+      }
+      .dropzone {
+        display: inline-block;
+        margin: 5px;
+        padding: 10px 15px;
+        font-size: 1.5rem;
+        background-color: #ffe6f2;
+        border: 2px dashed #ffb3d9;
+        border-radius: 5px;
+        min-width: 30px;
+        min-height: 30px;
+      }
+      .hidden {
+        display: none;
+      }
+      .message {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        color: #e60073;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        background: #ff4d6d;
+        color: white;
+        text-decoration: none;
+        display: inline-block;
+        margin-top: 20px;
+      }
+      .btn:hover {
+        background: #ff1a4d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>Word Scramble Game</h1>
+      <p style="font-size: 25px">
+        My english not englishing please milaiding na tala ko letter by dragging
+        to form a phrase:
+      </p>
+      <div id="scramble-container"></div>
+      <div id="dropzone-container"></div>
+      <a href="./letter.html" class="btn">Submit</a>
+      <p id="message" class="message"></p>
+    </div>
+    <script>
+      const phrase = "I Love you";
+      const letters = phrase.replace(/\s+/g, "").split("");
+      const scrambledLetters = shuffleArray(letters.slice());
+      const scrambleContainer = document.getElementById("scramble-container");
+      const dropzoneContainer = document.getElementById("dropzone-container");
+
+      scrambledLetters.forEach((letter, index) => {
+        const letterElement = document.createElement("div");
+        letterElement.textContent = letter;
+        letterElement.classList.add("letter");
+        letterElement.draggable = true;
+        letterElement.id = `letter-${index}`;
+        letterElement.addEventListener("dragstart", dragStart);
+        scrambleContainer.appendChild(letterElement);
+      });
+
+      for (let i = 0; i < letters.length; i++) {
+        const dropzone = document.createElement("div");
+        dropzone.classList.add("dropzone");
+        dropzone.addEventListener("dragover", dragOver);
+        dropzone.addEventListener("drop", drop);
+        dropzoneContainer.appendChild(dropzone);
+      }
+
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
+
+      function dragStart(event) {
+        event.dataTransfer.setData("text", event.target.id);
+      }
+
+      function dragOver(event) {
+        event.preventDefault();
+      }
+
+      function drop(event) {
+        event.preventDefault();
+        const letterId = event.dataTransfer.getData("text");
+        const letterElement = document.getElementById(letterId);
+        if (
+          event.target.classList.contains("dropzone") &&
+          !event.target.hasChildNodes()
+        ) {
+          event.target.appendChild(letterElement);
+        }
+      }
+
+      function checkAnswer() {
+        const dropzones = document.querySelectorAll(".dropzone");
+        let userAnswer = "";
+        dropzones.forEach((dropzone) => {
+          if (dropzone.hasChildNodes()) {
+            userAnswer += dropzone.firstChild.textContent;
+          } else {
+            userAnswer += " ";
+          }
+        });
+        userAnswer = userAnswer.trim();
+        const messageElement = document.getElementById("message");
+        if (
+          userAnswer.toLowerCase() === phrase.replace(/\s+/g, "").toLowerCase()
+        ) {
+          messageElement.textContent = "Congratulations! You solved it!";
+        } else {
+          messageElement.textContent = "Try again!";
+        }
+      }
+    </script>
+  </body>
+</html>

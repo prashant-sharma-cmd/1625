@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Animation Sequence</title>
+    <style>
+      @font-face {
+        font-family: "Super Sunday";
+        src: url("./images/SuperSunday-vn3MA.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+      body {
+        font-family: "Super Sunday", sans-serif;
+        text-align: center;
+        text-align: center;
+        background: url("./images/bg99.png") no-repeat center center/cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ffe6f2;
+        margin: 0;
+        flex-direction: column;
+      }
+
+      .message,
+      .question {
+        font-size: 2em;
+        color: #000000;
+        opacity: 0;
+        position: absolute;
+      }
+
+      #message1 {
+        animation: fadeInOut 6s linear 3s forwards;
+      }
+
+      #message2 {
+        animation: fadeInOut 4s linear 9s forwards;
+      }
+
+      #message3 {
+        animation: fadeInOut 3s linear 13s forwards;
+      }
+      #message4 {
+        animation: fadeInOut 4s linear 16s forwards;
+      }
+
+      #message5 {
+        animation: fadeInOut 3s linear 20s forwards;
+      }
+
+      #message6 {
+        animation: fadeInOut 2s linear 23s forwards;
+      }
+      #message7 {
+        animation: fadeInOut 3s linear 25s forwards;
+      }
+
+      #finalQuestion {
+        animation: fadeIn 2s linear 28s forwards;
+      }
+
+      @keyframes fadeInOut {
+        0% {
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .btn {
+        background-color: #e061a1;
+        font-family: "Super Sunday", sans-serif;
+
+        color: #000000;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #ff1493;
+      }
+      #musicModal {
+        display: flex;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      #musicModalContent {
+        background-color: #ffc0cb; /* Light pink background */
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 90%;
+        width: 400px;
+      }
+
+      #musicModalContent p {
+        color: #ffffff; /* White text color */
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+
+      #musicModalContent button {
+        background-color: #ff69b4; /* Hot pink button background */
+        color: #ffffff; /* White text color */
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 0 10px;
+        transition: background-color 0.3s;
+      }
+
+      #musicModalContent button:hover {
+        background-color: #ff1493; /* Deep pink on hover */
+      }
+    </style>
+  </head>
+  <body>
+    <audio id="backgroundMusic" src="./images/song1.mp3" preload="auto"></audio>
+
+    <div id="musicModal">
+      <div id="musicModalContent">
+        <p>Would you like to play background music?</p>
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+      </div>
+    </div>
+    <div class="message" id="message1">
+      We are in the middle of a Sakura Field with serene wind blowing on us,
+      petals surrounding us.
+    </div>
+    <div class="message" id="message2">
+      Hopefully someday real ma ni hunxa ahile lai just imagine ok.
+    </div>
+    <div class="message" id="message3">I get on my knees🧎.</div>
+    <div class="message" id="message4">
+      I pull a rose from my back pocket🌹.
+    </div>
+    <div class="message" id="message5">And I ask,</div>
+    <div class="message" id="message6">"Will you be my valentine🌹🧎?",</div>
+    <div class="message" id="message7">And you reply........</div>
+
+    <div class="question" id="finalQuestion">
+      <button class="btn" id="yes">OMGGG YESSSSSS!!!!</button>
+      <button class="btn" id="no">NO :((</button>
+    </div>
+    <script>
+      document.getElementById("yes").addEventListener("click", function () {
+        alert(
+          "Thank you sooo mucchhhh for accepting my proposal, you are the best!!!"
+        );
+      });
+
+      document.getElementById("no").addEventListener("click", function () {
+        alert(
+          "Lau why no please yes ma dabaing na yeti mehnat gareko jhan don't I deserve a wonderful valentine for myself"
+        );
+      });
+      function showMusicModal() {
+        var modal = document.getElementById("musicModal");
+        modal.style.display = "flex";
+
+        var yesBtn = document.getElementById("yesBtn");
+        var noBtn = document.getElementById("noBtn");
+
+        yesBtn.onclick = function () {
+          var audio = document.getElementById("backgroundMusic");
+          audio.play().catch(function (error) {
+            console.error("Error playing audio:", error);
+          });
+          modal.style.display = "none";
+        };
+
+        noBtn.onclick = function () {
+          modal.style.display = "none";
+        };
+      }
+      window.onload = showMusicModal;
+    </script>
+  </body>
+</html>
